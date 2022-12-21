@@ -1,0 +1,184 @@
+log-level: silent
+mode: rule
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+mixed-port: 8421
+allow-lan: false
+external-controller: 127.0.0.1:8420
+secret: 00000000
+tun:
+  enable: true
+  stack: gvisor
+  dns-hijack: [198.18.0.2:53]
+  auto-route: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - +.lan
+    - +.local
+  default-nameserver:
+    - 1.1.1.1
+    - 1.0.0.1
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+
+proxy-groups:
+  - name: _GLOBAL
+    type: select
+    proxies:
+      [DIRECT, CN, DE, GB, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
+  - name: _SYSTEM
+    type: select
+    proxies: [_GLOBAL, DIRECT, NODE0, NODE1, NODE2, NODE3]
+  - name: _REGION
+    type: select
+    proxies:
+      [DIRECT, CN, DE, GB, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
+  - name: _CN
+    type: select
+    proxies: [_REGION, DIRECT, CN, NODE0, NODE1, NODE2, NODE3]
+  - name: _JP
+    type: select
+    proxies: [_REGION, DIRECT, JP, NODE0, NODE1, NODE2, NODE3]
+  - name: _TW
+    type: select
+    proxies: [_REGION, DIRECT, TW, NODE0, NODE1, NODE2, NODE3]
+  - name: _US
+    type: select
+    proxies: [_REGION, DIRECT, US, NODE0, NODE1, NODE2, NODE3]
+
+  - { name: NODE0, type: select, proxies: /.*/ }
+  - { name: NODE1, type: select, proxies: /.*/ }
+  - { name: NODE2, type: select, proxies: /.*/ }
+  - { name: NODE3, type: select, proxies: /.*/ }
+
+  - name: NODE
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /.*/
+  - name: CN
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((CN)|(CHN)|(China))(?![a-zA-Z])|(🇨🇳)|中|(回国)/
+  - name: DE
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((DE)|(German)|(Berlin))(?![a-zA-Z])|(🇩🇪)|德/
+  - name: GB
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((?<![0-9]\s?)(GB)|(UK)|(London))(?![a-zA-Z])|(🇬🇧)|英/
+  - name: JP
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(🇯🇵)|(?<!尼)日/
+  - name: SG
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((SG)|(Singapore))(?![a-zA-Z])|(🇸🇬)|新|(獅|狮城)/
+  - name: TW
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|(🇹🇼)|臺|台/
+  - name: US
+    type: url-test
+    lazy: true
+    url: http://1.1.1.1/
+    proxies: /(?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|(🇺🇸)|美/
+
+rule-providers:
+  DIRECT:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/direct.yml
+    path: ./filter/direct.yml
+    interval: 86400
+  DIRECT-IP:
+    behavior: ipcidr
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/direct.ip.yml
+    path: ./filter/direct.ip.yml
+    interval: 86400
+  GLOBAL:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/global.yml
+    path: ./filter/global.yml
+    interval: 86400
+  SYSTEM:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/system.yml
+    path: ./filter/system.yml
+    interval: 86400
+  SYSTEM-IP:
+    behavior: ipcidr
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/system.ip.yml
+    path: ./filter/system.ip.yml
+    interval: 86400
+  BLOCK:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/block.yml
+    path: ./filter/block.yml
+    interval: 86400
+  REGION:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/region.yml
+    path: ./filter/region.yml
+    interval: 86400
+  R-CN:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/r-cn.yml
+    path: ./filter/r-cn.yml
+    interval: 86400
+  R-JP:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/r-jp.yml
+    path: ./filter/r-jp.yml
+    interval: 86400
+  R-TW:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/r-tw.yml
+    path: ./filter/r-tw.yml
+    interval: 86400
+  R-US:
+    behavior: domain
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/clash/filter/r-us.yml
+    path: ./filter/r-us.yml
+    interval: 86400
+
+rules:
+  - RULE-SET, DIRECT, DIRECT
+  - RULE-SET, GLOBAL, _GLOBAL
+  - RULE-SET, SYSTEM, _SYSTEM
+  - RULE-SET, BLOCK, REJECT
+  - RULE-SET, REGION, _REGION
+  - RULE-SET, R-CN, _CN
+  - RULE-SET, R-JP, _JP
+  - RULE-SET, R-TW, _TW
+  - RULE-SET, R-US, _US
+  - RULE-SET, DIRECT-IP, DIRECT
+  - RULE-SET, SYSTEM-IP, _SYSTEM
+  - GEOIP, CN, _CN
+  - MATCH, _GLOBAL
