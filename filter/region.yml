@@ -1,0 +1,32 @@
+domain:
+  # Netflix
+  - fast.com
+  - netflix.com
+  - netflix.net
+  - nflxext.com
+  - nflximg.com
+  - nflximg.net
+  - nflxso.net
+  - nflxvideo.com
+  - nflxvideo.net
+  # Spotify
+  - pscdn.co
+  - scdn.co
+  - spoti.fi
+  - spotify.com
+  - spotifycdn.com
+  - spotifycdn.net
+  # BBC
+  - acast.com
+  - bbc.co
+  - bbc.co.uk
+  - bbc.com
+  - bbci.co
+  - bbci.co.uk
+  # Disney
+  # DAZN
+  - dazn-api.com
+  - dazn.com
+
+  # Media
+  - tidal.com

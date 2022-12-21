@@ -1,0 +1,13 @@
+domain:
+  - tw
+  # CDN
+  - hinet.net
+  # Content
+  - hamreus.com # mhg
+  - lightnovel.us
+  - manhuagui.com
+  - masiro.me
+  - masiro.moe
+  - picacomic.com
+  # Game
+  - gamon.net

@@ -1,0 +1,26 @@
+domain:
+  - jp
+  # DMM
+  - dmm-extension.com
+  - dmm.com
+  - dmmapis.com
+  # Abema
+  - abema-tv.com
+  - abema.tv
+  - hayabusa.io
+  - hayabusa.media
+  # Pixiv
+  - booth.pm
+  - fanbox.cc
+  - pixiv.me
+  - pixiv.net
+  - pximg.net
+
+  # Social
+  - 2ch.net
+  - 5ch.net
+  # Media
+  - nico.ms
+  - dmc.nico
+  # Game
+  - colorfulpalette.org
