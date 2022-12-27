@@ -127,13 +127,21 @@ domain:
   - hdslb.com
   # ByteDance
   - amemv.com
+  - bdurl.net
+  - bdxiguastatic.com
   - byteactivity.com
   - bytedance.com
   - byteimg.com
+  - bytemastatic.com
+  - bytexservice.com
   - douyin.com
   - douyinpic.com
+  - douyinstatic.com
   - douyinvod.com
   - feishucdn.com
+  - ibytedapm.com
+  - ixigua.com
+  - pstatp.com
   - snssdk.com
   - toutiao.com
   - toutiaoapi.com

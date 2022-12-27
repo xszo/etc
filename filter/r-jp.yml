@@ -6,7 +6,10 @@ domain:
   - dmmapis.com
   # Abema
   - abema-tv.com
+  - abema.adx.promo
+  - abema.io
   - abema.tv
+  - abematv.akamaized.net
   - hayabusa.io
   - hayabusa.media
   # Pixiv
@@ -20,7 +23,8 @@ domain:
   - 2ch.net
   - 5ch.net
   # Media
-  - nico.ms
   - dmc.nico
+  - nico.ms
+  - syosetu.com
   # Game
   - colorfulpalette.org

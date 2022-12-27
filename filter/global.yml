@@ -55,8 +55,8 @@ domain:
   - msauth.net
   - msecnd.net
   - msftauth.net
+  - msftstatic.com
   - msn.com
-  - nelreports.net
   - office.com
   - office.net
   - onedrive.com
@@ -113,6 +113,7 @@ domain:
   - cloudflareinsights.com
   - hcaptcha.com
   - pages.dev
+  - workers.dev
   # Adobe
   - adobe.com
   - adobedtm.com
@@ -152,12 +153,6 @@ domain:
   - firefoxusercontent.com
   - mozilla.net
   - mozilla.org
-  # Adguard
-  - adguard-dns.com
-  - adguard-vpn.com
-  - adguard.com
-  - adguard.org
-  - adtidy.org
   # Sony
   - playstation.com
   - playstation.net
@@ -268,6 +263,9 @@ domain:
   - linkfire.com
   - linktr.ee
   - lnk.to
+  - nelreports.net
+  - newrelic.com
+  - nr-data.net
   - onesignal.com
   - optimizely.com
   - scorecardresearch.com

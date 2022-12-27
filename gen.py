@@ -26,8 +26,7 @@ for item in listFilter:
     with open('filter/' + item + '.yml', 'tr', encoding='utf-8') as file:
         src = yaml.safe_load(file)
     flagDomain = 'domain' in src
-    flagIp = 'ip' in src
-    flagIp6 = 'ip6' in src
+    flagIpcidr = 'ipcidr' in src
     flagPort = 'port' in src
 
     # generate quantumult conf
@@ -39,12 +38,12 @@ for item in listFilter:
                     out.write('host,' + line[1:] + ',proxy\n')
                 else:
                     out.write('host-suffix,' + line + ',proxy\n')
-        if flagIp:
-            for line in src['ip']:
-                out.write('ip-cidr,' + line + ',proxy\n')
-        if flagIp6:
-            for line in src['ip6']:
-                out.write('ip6-cidr,' + line + ',proxy\n')
+        if flagIpcidr:
+            for line in src['ipcidr']:
+                if line[0] == '[':
+                    out.write('ip6-cidr,' + line[1:-1] + ',proxy\n')
+                else:
+                    out.write('ip-cidr,' + line + ',proxy\n')
 
     # generate clash conf
 
@@ -57,15 +56,15 @@ for item in listFilter:
                     out.write('- ' + line[1:] + '\n')
                 else:
                     out.write('- +.' + line + '\n')
-    if flagIp or flagIp6:
+    if flagIpcidr:
         with open(outDir + item + '.ip.yml', 'tw', encoding='utf-8') as out:
             out.write('payload:\n')
-            if flagIp:
-                for line in src['ip']:
-                    out.write('- ' + line + '\n')
-            if flagIp6:
-                for line in src['ip6']:
-                    out.write('- ' + line + '\n')
+            if flagIpcidr:
+                for line in src['ipcidr']:
+                    if line[0] == '[':
+                        out.write('- ' + line[1:-1] + '\n')
+                    else:
+                        out.write('- ' + line + '\n')
     if flagPort:
         with open(outDir + item + '.ms.yml', 'tw', encoding='utf-8') as out:
             out.write('payload:\n')
@@ -82,14 +81,14 @@ for item in listFilter:
                     out.write('DOMAIN,' + line[1:] + '\n')
                 else:
                     out.write('DOMAIN-SUFFIX,' + line + '\n')
-    if flagIp or flagIp6:
+    if flagIpcidr:
         with open(outDir + item + '.ip.txt', 'tw', encoding='utf-8') as out:
-            if flagIp:
-                for line in src['ip']:
-                    out.write('IP-CIDR,' + line + '\n')
-            if flagIp6:
-                for line in src['ip6']:
-                    out.write('IP-CIDR6,' + line + '\n')
+            if flagIpcidr:
+                for line in src['ipcidr']:
+                    if line[0] == '[':
+                        out.write('IP-CIDR6,' + line[1:-1] + '\n')
+                    else:
+                        out.write('IP-CIDR,' + line + '\n')
     if flagPort:
         with open(outDir + item + '.ms.txt', 'tw', encoding='utf-8') as out:
             for line in src['port']:

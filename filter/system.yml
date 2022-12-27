@@ -14,5 +14,5 @@ domain:
   # Microsoft
   - msftconnecttest.com
   - msftncsi.com
-ip:
+ipcidr:
   - 17.0.0.0/8
