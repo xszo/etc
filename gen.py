@@ -21,6 +21,6 @@ for srcPath in listSrc:
     else:
         exe = open(srcPath + '.py', 'tr', encoding='utf-8')
         out = open(outPath, 'tw', encoding='utf-8')
-        exec(exe.read())
+        exec(exe.read(), {'out': out, 'yaml': yaml})
         exe.close()
         out.close()

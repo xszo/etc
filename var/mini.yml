@@ -1,0 +1,50 @@
+node:
+  - name: NODE
+    type: test
+    content: -a
+    a-ico: arrow.triangle.swap.system
+  - name: JP
+    type: test
+    content: (?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(?<!尼)日
+    a-ico: arrow.triangle.swap.system
+  - name: TW
+    type: test
+    content: (?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|臺|台
+    a-ico: arrow.triangle.swap.system
+  - name: US
+    type: test
+    content: (?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美
+    a-ico: arrow.triangle.swap.system
+filter:
+  - name: DIRECT
+    type: [domain, ipcidr]
+    content: filter/direct
+  - name: PROXY
+    type: [domain]
+    content: filter/global
+  - name: DIRECT
+    type: [domain, ipcidr]
+    content: filter/system
+  - name: REJECT
+    type: [domain]
+    content: filter/block
+  - name: PROXY
+    type: [domain]
+    content: filter/region
+  - name: DIRECT
+    type: [domain]
+    content: filter/r-cn
+  - name: JP
+    type: [domain]
+    content: filter/r-jp
+  - name: TW
+    type: [domain]
+    content: filter/r-tw
+  - name: US
+    type: [domain]
+    content: filter/r-us
+  - name: DIRECT
+    type: geoip
+    content: CN
+  - name: PROXY
+    type: final

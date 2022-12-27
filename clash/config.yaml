@@ -68,37 +68,37 @@ proxy-groups:
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((CN)|(CHN)|(China))(?![a-zA-Z])|(🇨🇳)|中|(回国)/
+    proxies: /(?<![a-zA-Z])((CN)|(CHN)|(China))(?![a-zA-Z])|中|(回国)/
   - name: DE
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((DE)|(German)|(Berlin))(?![a-zA-Z])|(🇩🇪)|德/
+    proxies: /(?<![a-zA-Z])((DE)|(German)|(Berlin))(?![a-zA-Z])|德/
   - name: GB
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((?<![0-9]\s?)(GB)|(UK)|(London))(?![a-zA-Z])|(🇬🇧)|英/
+    proxies: /(?<![a-zA-Z])((?<![0-9]\s?)(GB)|(UK)|(London))(?![a-zA-Z])|英/
   - name: JP
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(🇯🇵)|(?<!尼)日/
+    proxies: /(?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(?<!尼)日/
   - name: SG
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((SG)|(Singapore))(?![a-zA-Z])|(🇸🇬)|新|(獅|狮城)/
+    proxies: /(?<![a-zA-Z])((SG)|(Singapore))(?![a-zA-Z])|新|(獅|狮城)/
   - name: TW
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|(🇹🇼)|臺|台/
+    proxies: /(?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|臺|台/
   - name: US
     type: url-test
     lazy: true
     url: http://1.1.1.1/
-    proxies: /(?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|(🇺🇸)|美/
+    proxies: /(?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美/
 
 rule-providers:
   DIRECT:
