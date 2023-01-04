@@ -16,35 +16,35 @@ node:
     content: (?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美
     a-ico: arrow.triangle.swap.system
 filter:
-  - name: DIRECT
+  - name: direct
     type: [domain, ipcidr]
-    content: filter/direct
-  - name: PROXY
+    content: DIRECT
+  - name: global
     type: [domain]
-    content: filter/global
-  - name: DIRECT
+    content: PROXY
+  - name: system
     type: [domain, ipcidr]
-    content: filter/system
-  - name: REJECT
+    content: DIRECT
+  - name: block
     type: [domain]
-    content: filter/block
-  - name: PROXY
+    content: REJECT
+  - name: region
     type: [domain]
-    content: filter/region
-  - name: DIRECT
+    content: PROXY
+  - name: r-cn
     type: [domain]
-    content: filter/r-cn
-  - name: JP
+    content: DIRECT
+  - name: r-jp
     type: [domain]
-    content: filter/r-jp
-  - name: TW
+    content: JP
+  - name: r-tw
     type: [domain]
-    content: filter/r-tw
-  - name: US
+    content: TW
+  - name: r-us
     type: [domain]
-    content: filter/r-us
-  - name: DIRECT
+    content: US
+  - name: CN
     type: geoip
-    content: CN
-  - name: PROXY
-    type: final
+    content: DIRECT
+  - type: final
+    content: PROXY

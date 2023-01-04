@@ -3,12 +3,13 @@ with open('var/main.yml', 'tr', encoding='utf-8') as file:
 base = src['meta']['base'] + 'surge/'
 interval = str(src['meta']['interval'])
 
+
 def o(line=''):
     out.write(line + '\n')
 
-# start
 
-o('#!MANAGED-CONFIG ' + base + 'base.conf' + ' interval=' + interval + ' strict=false')
+o('#!MANAGED-CONFIG ' + base + 'base.conf' +
+  ' interval=' + interval + ' strict=false')
 o()
 o('[General]')
 o('loglevel = warning')
@@ -37,18 +38,16 @@ for item in src['node']:
 o()
 o('[Rule]')
 for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'domain' in item['type']:
-            o('RULE-SET, ' + base + item['content'] + '.txt, ' +
-              item['name'] + ', update-interval=' + interval)
+    if isinstance(item['type'], list) and 'domain' in item['type']:
+        o('RULE-SET, ' + base + 'filter/' + item['name'] + '.txt, ' +
+          item['content'] + ', update-interval=' + interval)
 for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'ipcidr' in item['type']:
-            o('RULE-SET, ' + base + item['content'] + '.ip.txt, ' +
-              item['name'] + ', update-interval=' + interval)
+    if isinstance(item['type'], list) and 'ipcidr' in item['type']:
+        o('RULE-SET, ' + base + 'filter/' + item['name'] + '.ip.txt, ' +
+          item['content'] + ', update-interval=' + interval)
 for item in src['filter']:
     if not isinstance(item['type'], list):
         if item['type'] == 'geoip':
-            o('GEOIP, ' + item['content'] + ', ' + item['name'])
+            o('GEOIP, ' + item['name'] + ', ' + item['content'])
         elif item['type'] == 'final':
-            o('FINAL, ' + item['name'])
+            o('FINAL, ' + item['content'])

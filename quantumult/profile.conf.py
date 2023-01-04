@@ -3,10 +3,10 @@ with open('var/main.yml', 'tr', encoding='utf-8') as file:
 base = src['meta']['base'] + 'quantumult/'
 interval = str(src['meta']['interval'])
 
+
 def o(line=''):
     out.write(line + '\n')
 
-# start
 
 o('# ' + base + 'profile.conf')
 o()
@@ -38,19 +38,18 @@ for item in src['node']:
     o(line + ', img-url=' + item['a-ico'])
 o()
 o('[filter_local]')
-o('host-suffix, quantumult.app, _GLOBAL')
 for item in src['filter']:
     if not isinstance(item['type'], list):
         if item['type'] == 'geoip':
-            o('geoip, ' + item['content'] + ', ' + item['name'])
+            o('geoip, ' + item['name'] + ', ' + item['content'])
         elif item['type'] == 'final':
-            o('final, ' + item['name'])
+            o('final, ' + item['content'])
 o()
 o('[filter_remote]')
 for item in src['filter']:
     if isinstance(item['type'], list):
-        o(base + item['content'] + '.txt, tag=' + item['content'] +
-          ', force-policy=' + item['name'] + ', update-interval=' + interval)
+        o(base + 'filter/' + item['name'] + '.txt, tag=' + item['name'] +
+          ', force-policy=' + item['content'] + ', update-interval=' + interval)
 o()
 o('[mitm]')
 o()

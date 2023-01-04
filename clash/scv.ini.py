@@ -3,10 +3,10 @@ with open('var/main.yml', 'tr', encoding='utf-8') as file:
 base = src['meta']['base'] + 'clash/'
 interval = str(src['meta']['interval'])
 
+
 def o(line=''):
     out.write(line + '\n')
 
-# start
 
 o('# ' + base + 'scv.ini')
 o('[custom]')
@@ -35,18 +35,16 @@ for item in src['node']:
 o('enable_rule_generator=true')
 o('overwrite_original_rules=true')
 for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'domain' in item['type']:
-            o('ruleset=' + item['name'] + ',clash-domain:' +
-              base + item['content'] + '.yml')
+    if isinstance(item['type'], list) and 'domain' in item['type']:
+        o('ruleset=' + item['content'] + ',clash-domain:' +
+          base + 'filter/' + item['name'] + '.yml')
 for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'ipcidr' in item['type']:
-            o('ruleset=' + item['name'] + ',clash-ipcidr:' +
-              base + item['content'] + '.ip.yml')
+    if isinstance(item['type'], list) and 'ipcidr' in item['type']:
+        o('ruleset=' + item['content'] + ',clash-ipcidr:' +
+          base + 'filter/' + item['name'] + '.ip.yml')
 for item in src['filter']:
     if not isinstance(item['type'], list):
         if item['type'] == 'geoip':
-            o('ruleset=' + item['name'] + ',[]GEOIP,' + item['content'])
+            o('ruleset=' + item['content'] + ',[]GEOIP,' + item['name'])
         elif item['type'] == 'final':
-            o('ruleset=' + item['name'] + ',[]FINAL')
+            o('ruleset=' + item['content'] + ',[]FINAL')

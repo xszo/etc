@@ -9,36 +9,40 @@ dns:
     - 1.0.0.1
   doh: https://cloudflare-dns.com/dns-query
 node:
-  - name: _GLOBAL
+  - name: DEFAULT
     type: static
     content:
-      [DIRECT, CN, DE, GB, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
+      [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.arrow.right.system
-  - name: _SYSTEM
+  - name: SYSTEM
     type: static
-    content: [_GLOBAL, DIRECT, NODE0, NODE1, NODE2, NODE3]
+    content: [DEFAULT, DIRECT, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.and.right.system
-  - name: _REGION
+  - name: REGION
     type: static
     content:
-      [DIRECT, CN, DE, GB, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
+      [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.arrow.right.system
-  - name: _CN
+  - name: R-CN
     type: static
-    content: [_REGION, DIRECT, CN, NODE0, NODE1, NODE2, NODE3]
+    content: [REGION, DIRECT, CN, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.and.right.system
-  - name: _JP
+  - name: R-JP
     type: static
-    content: [_REGION, DIRECT, JP, NODE0, NODE1, NODE2, NODE3]
+    content: [REGION, DIRECT, JP, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.and.right.system
-  - name: _TW
+  - name: R-TW
     type: static
-    content: [_REGION, DIRECT, TW, NODE0, NODE1, NODE2, NODE3]
+    content: [REGION, DIRECT, TW, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.and.right.system
-  - name: _US
+  - name: R-US
     type: static
-    content: [_REGION, DIRECT, US, NODE0, NODE1, NODE2, NODE3]
+    content: [REGION, DIRECT, US, NODE0, NODE1, NODE2, NODE3]
     a-ico: arrow.left.and.right.system
+  - name: NODE
+    type: test
+    content: -a
+    a-ico: arrow.triangle.swap.system
   - name: NODE0
     type: static
     content: -a
@@ -55,10 +59,6 @@ node:
     type: static
     content: -a
     a-ico: arrow.triangle.branch.system
-  - name: NODE
-    type: test
-    content: -a
-    a-ico: arrow.triangle.swap.system
   - name: CN
     type: test
     content: (?<![a-zA-Z])((CN)|(CHN)|(China))(?![a-zA-Z])|中
@@ -88,35 +88,35 @@ node:
     content: (?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美
     a-ico: arrow.triangle.swap.system
 filter:
-  - name: DIRECT
+  - name: direct
     type: [domain, ipcidr]
-    content: filter/direct
-  - name: _GLOBAL
+    content: DIRECT
+  - name: global
     type: [domain]
-    content: filter/global
-  - name: _SYSTEM
+    content: DEFAULT
+  - name: system
     type: [domain, ipcidr]
-    content: filter/system
-  - name: REJECT
+    content: SYSTEM
+  - name: block
     type: [domain]
-    content: filter/block
-  - name: _REGION
+    content: REJECT
+  - name: region
     type: [domain]
-    content: filter/region
-  - name: _CN
+    content: REGION
+  - name: r-cn
     type: [domain]
-    content: filter/r-cn
-  - name: _JP
+    content: R-CN
+  - name: r-jp
     type: [domain]
-    content: filter/r-jp
-  - name: _TW
+    content: R-JP
+  - name: r-tw
     type: [domain]
-    content: filter/r-tw
-  - name: _US
+    content: R-TW
+  - name: r-us
     type: [domain]
-    content: filter/r-us
-  - name: _CN
+    content: R-US
+  - name: CN
     type: geoip
-    content: CN
-  - name: _GLOBAL
-    type: final
+    content: R-CN
+  - type: final
+    content: DEFAULT

@@ -1,14 +1,14 @@
 with open('var/main.yml', 'tr', encoding='utf-8') as file:
-    sb = yaml.safe_load(file)
-with open('var/mini.yml', 'tr', encoding='utf-8')as file:
     src = yaml.safe_load(file)
-base = sb['meta']['base']
-interval = str(sb['meta']['interval'])
+with open('var/cn.yml', 'tr', encoding='utf-8')as file:
+    scn = yaml.safe_load(file)
+base = src['meta']['base']
+interval = str(src['meta']['interval'])
+
 
 def o(line=''):
     out.write(line + '\n')
 
-# start
 
 o('[General]')
 o('update-url = ' + base + 'other/sr.conf')
@@ -16,12 +16,12 @@ o('hijack-dns = *:53')
 o('dns-server = system')
 o()
 o('[Proxy Group]')
-for item in src['node']:
+for item in scn['node']:
     line = item['name'] + ' = '
     if item['type'] == 'static':
         line += 'select'
     elif item['type'] == 'test':
-        line += 'url-test, url=' + sb['meta']['t-http']
+        line += 'url-test, url=' + src['meta']['t-http']
     else:
         continue
     if isinstance(item['content'], list):
@@ -35,17 +35,17 @@ for item in src['node']:
     o(line)
 o()
 o('[Rule]')
-for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'domain' in item['type']:
-            o('RULE-SET, ' + base + 'surge/' + item['content'] + '.txt, ' + item['name'])
-for item in src['filter']:
-    if isinstance(item['type'], list):
-        if 'ipcidr' in item['type']:
-            o('RULE-SET, ' + base + 'surge/' + item['content'] + '.ip.txt, ' + item['name'])
-for item in src['filter']:
+for item in scn['filter']:
+    if isinstance(item['type'], list) and 'domain' in item['type']:
+        o('RULE-SET, ' + base + 'surge/filter/' +
+          item['name'] + '.txt, ' + item['content'])
+for item in scn['filter']:
+    if isinstance(item['type'], list) and 'ipcidr' in item['type']:
+        o('RULE-SET, ' + base + 'surge/filter/' +
+          item['name'] + '.ip.txt, ' + item['content'])
+for item in scn['filter']:
     if not isinstance(item['type'], list):
         if item['type'] == 'geoip':
-            o('GEOIP, ' + item['content'] + ', ' + item['name'])
+            o('GEOIP, ' + item['name'] + ', ' + item['content'])
         elif item['type'] == 'final':
-            o('FINAL, ' + item['name'])
+            o('FINAL, ' + item['content'])
