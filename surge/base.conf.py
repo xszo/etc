@@ -1,12 +1,9 @@
-with open('var/main.yml', 'tr', encoding='utf-8') as file:
-    src = yaml.safe_load(file)
-base = src['meta']['base'] + 'surge/'
-interval = str(src['meta']['interval'])
-
-
 def o(line=''):
     out.write(line + '\n')
 
+
+base = src['base'] + 'surge/'
+interval = str(src['interval'])
 
 o('#!MANAGED-CONFIG ' + base + 'base.conf' +
   ' interval=' + interval + ' strict=false')
@@ -14,9 +11,10 @@ o()
 o('[General]')
 o('loglevel = warning')
 o('hijack-dns = *:53')
-o('dns-server = system')
-o('internet-test-url = ' + src['meta']['t-http'])
-o('proxy-test-url = ' + src['meta']['t-http'])
+o('dns-server = ' + src['dns']['plain'][0] + ', ' + src['dns']['plain'][1])
+o('encrypted-dns-server = ' + src['dns']['doh'])
+o('internet-test-url = ' + src['t-http'])
+o('proxy-test-url = ' + src['t-http'])
 o()
 o('[Proxy Group]')
 for item in src['node']:
@@ -27,27 +25,29 @@ for item in src['node']:
         line += 'url-test'
     else:
         continue
-    if isinstance(item['content'], list):
-        for val in item['content']:
-            line += (', ' + val)
+    if 'content' in item:
+        if isinstance(item['content'], list):
+            for val in item['content']:
+                line += (', ' + val)
+        else:
+            line += ', include-all-proxies=true, policy-regex-filter=' + \
+                item['content']
     else:
         line += ', include-all-proxies=true'
-        if not item['content'] == '-a':
-            line += ', policy-regex-filter=' + item['content']
     o(line)
 o()
 o('[Rule]')
 for item in src['filter']:
-    if isinstance(item['type'], list) and 'domain' in item['type']:
-        o('RULE-SET, ' + base + 'filter/' + item['name'] + '.txt, ' +
-          item['content'] + ', update-interval=' + interval)
-for item in src['filter']:
-    if isinstance(item['type'], list) and 'ipcidr' in item['type']:
-        o('RULE-SET, ' + base + 'filter/' + item['name'] + '.ip.txt, ' +
-          item['content'] + ', update-interval=' + interval)
-for item in src['filter']:
-    if not isinstance(item['type'], list):
-        if item['type'] == 'geoip':
-            o('GEOIP, ' + item['name'] + ', ' + item['content'])
-        elif item['type'] == 'final':
-            o('FINAL, ' + item['content'])
+    match item[0]:
+        case 0:
+            o('FINAL,' + item[1])
+        case 1:
+            o('DOMAIN-SUFFIX,' + item[1] + ',' + item[2])
+        case 2:
+            o('DOMAIN,' + item[1] + ',' + item[2])
+        case 3:
+            o('IP-CIDR,' + item[1] + ',' + item[2])
+        case 4:
+            o('IP-CIDR6,' + item[1] + ',' + item[2])
+        case 5:
+            o('GEOIP,' + item[1] + ',' + item[2])

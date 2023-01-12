@@ -1,16 +1,13 @@
-with open('var/main.yml', 'tr', encoding='utf-8') as file:
-    src = yaml.safe_load(file)
-base = src['meta']['base'] + 'clash/'
-interval = str(src['meta']['interval'])
-
-
 def o(line=''):
     out.write(line + '\n')
 
 
+base = src['base'] + 'clash/'
+interval = str(src['interval'])
+
 o('# ' + base + 'scv.ini')
 o('[custom]')
-o('clash_rule_base=' + base + 'scv.yml')
+o('clash_rule_base=' + base + 'config.yaml')
 o('add_emoji=false')
 o('remove_old_emoji=false')
 for item in src['node']:
@@ -21,30 +18,30 @@ for item in src['node']:
         line += '`url-test'
     else:
         continue
-    if isinstance(item['content'], list):
-        for val in item['content']:
-            line += ('`[]' + val)
-    else:
-        if item['content'] == '-a':
-            line += '`.*'
+    if 'content' in item:
+        if isinstance(item['content'], list):
+            for val in item['content']:
+                line += ('`[]' + val)
         else:
             line += '`' + item['content']
+    else:
+        line += '`.*'
     if item['type'] == 'test':
-        line += '`' + src['meta']['t-http'] + '`600'
+        line += '`' + src['t-http'] + '`600'
     o(line)
 o('enable_rule_generator=true')
 o('overwrite_original_rules=true')
 for item in src['filter']:
-    if isinstance(item['type'], list) and 'domain' in item['type']:
-        o('ruleset=' + item['content'] + ',clash-domain:' +
-          base + 'filter/' + item['name'] + '.yml')
-for item in src['filter']:
-    if isinstance(item['type'], list) and 'ipcidr' in item['type']:
-        o('ruleset=' + item['content'] + ',clash-ipcidr:' +
-          base + 'filter/' + item['name'] + '.ip.yml')
-for item in src['filter']:
-    if not isinstance(item['type'], list):
-        if item['type'] == 'geoip':
-            o('ruleset=' + item['content'] + ',[]GEOIP,' + item['name'])
-        elif item['type'] == 'final':
-            o('ruleset=' + item['content'] + ',[]FINAL')
+    match item[0]:
+        case 0:
+            o('ruleset=' + item[1] + ',[]FINAL')
+        case 1:
+            o('ruleset=' + item[2] + ',[]DOMAIN-SUFFIX,' + item[1])
+        case 2:
+            o('ruleset=' + item[2] + ',[]DOMAIN,' + item[1])
+        case 3:
+            o('ruleset=' + item[2] + ',[]IP-CIDR,' + item[1])
+        case 4:
+            o('ruleset=' + item[2] + ',[]IP-CIDR6,' + item[1])
+        case 5:
+            o('ruleset=' + item[2] + ',[]GEOIP,' + item[1])
