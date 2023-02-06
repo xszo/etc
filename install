@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+sudo apt install python3 python-is-python3
+python -m pip install pyyaml
+
+source gen

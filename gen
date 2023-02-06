@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+ListGen=( "net/filter" "net/main" )
+
+OptOut=false
+while getopts "o" opt; do
+  case ${opt} in
+    o ) OptOut=true ;;
+esac; done
+
+rm -Rf tmp out
+cp -Rf src out
+for item in ${ListGen[@]}; do
+  git checkout ${item}
+  python gen.py
+done
+
+if [ ${OptOut} = true ]; then
+  if git checkout o; then
+    cp -Rf out/* .
+    git add -A
+    git commit -qm gen --amend --reset-author
+    git push -f
+  fi
+  rm -Rf tmp out
+else
+  git checkout main
+  rm -Rf tmp
+fi
