@@ -1,15 +1,10 @@
-def o(line=''):
+def o(line):
     out.write(line + '\n')
 
 
-base = src['base'] + 'clash/'
-interval = str(src['interval'])
-
-o('# ' + base + 'scv.ini')
+o('# ' + src['base'] + 'clash/scv.ini')
 o('[custom]')
-o('clash_rule_base=' + base + 'config.yaml')
-o('add_emoji=false')
-o('remove_old_emoji=false')
+o('clash_rule_base=' + src['base'] + 'clash/scv.yml')
 for item in src['node']:
     line = 'custom_proxy_group=' + item['name']
     if item['type'] == 'static':
@@ -18,14 +13,11 @@ for item in src['node']:
         line += '`url-test'
     else:
         continue
-    if 'content' in item:
-        if isinstance(item['content'], list):
-            for val in item['content']:
-                line += ('`[]' + val)
-        else:
-            line += '`' + item['content']
+    if isinstance(item['content'], list):
+        for val in item['content']:
+            line += ('`[]' + val)
     else:
-        line += '`.*'
+        line += '`' + item['content']
     if item['type'] == 'test':
         line += '`' + src['t-http'] + '`600'
     o(line)

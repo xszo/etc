@@ -1,4 +1,4 @@
-def o(line=''):
+def o(line):
     out.write(line + '\n')
 
 

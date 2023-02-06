@@ -1,4 +1,3 @@
-#!name= Router
-
+#!name=Router
 [General]
-external-controller-access = 00000000@0.0.0.0:8420
+external-controller-access=00000000@0.0.0.0:8420

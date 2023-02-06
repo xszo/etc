@@ -1,41 +1,38 @@
-- name: direct
-  type: gen
+- type: gen
+  name: direct
   content: DIRECT
-- name: global
-  type: gen
+- type: gen
+  name: global
   content: DEFAULT
-- name: system
-  type: gen
+- type: gen
+  name: system
   content: SYSTEM
-- name: block
-  type: gen
+- type: gen
+  name: block
   content: REJECT
-- name: region
-  type: gen
+- type: gen
+  name: region
   content: REGION
-- name: r-cn
-  type: gen
+- type: gen
+  name: r-cn
   content: R-CN
-- name: r-jp
-  type: gen
-  content: R-JP
-- name: r-tw
-  type: gen
-  content: R-TW
-- name: r-us
-  type: gen
-  content: R-US
-- name: CN
-  type: geoip
+- type: geoip
+  name: CN
   content: R-CN
-- name: JP
-  type: geoip
+- type: gen
+  name: r-jp
   content: R-JP
-- name: TW
-  type: geoip
+- type: geoip
+  name: JP
+  content: R-JP
+- type: gen
+  name: r-tw
   content: R-TW
-- name: US
-  type: geoip
+- type: geoip
+  name: TW
+  content: R-TW
+- type: gen
+  name: r-us
   content: R-US
 - type: final
   content: DEFAULT

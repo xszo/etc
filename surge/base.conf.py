@@ -1,41 +1,33 @@
-def o(line=''):
+def o(line):
     out.write(line + '\n')
 
 
-base = src['base'] + 'surge/'
-interval = str(src['interval'])
-
-o('#!MANAGED-CONFIG ' + base + 'base.conf' +
-  ' interval=' + interval + ' strict=false')
-o()
-o('[General]')
-o('loglevel = warning')
-o('hijack-dns = *:53')
-o('dns-server = ' + src['dns']['plain'][0] + ', ' + src['dns']['plain'][1])
-o('encrypted-dns-server = ' + src['dns']['doh'])
-o('internet-test-url = ' + src['t-http'])
-o('proxy-test-url = ' + src['t-http'])
-o()
+o('#!MANAGED-CONFIG ' + src['base'] + 'surge/base.conf' +
+  ' interval=' + str(src['interval']) + ' strict=false')
+o('''[General]
+loglevel=warning
+hijack-dns=*:53
+udp-policy-not-supported-behaviour=REJECT''')
+o('dns-server=' + src['dns']['plain'][0] + ',' + src['dns']['plain'][1])
+o('encrypted-dns-server=' + src['dns']['doh'])
+o('internet-test-url=' + src['t-http'])
+o('proxy-test-url=' + src['t-http'])
 o('[Proxy Group]')
 for item in src['node']:
-    line = item['name'] + ' = '
+    line = item['name'] + '='
     if item['type'] == 'static':
         line += 'select'
     elif item['type'] == 'test':
         line += 'url-test'
     else:
         continue
-    if 'content' in item:
-        if isinstance(item['content'], list):
-            for val in item['content']:
-                line += (', ' + val)
-        else:
-            line += ', include-all-proxies=true, policy-regex-filter=' + \
-                item['content']
+    if isinstance(item['content'], list):
+        for val in item['content']:
+            line += (',' + val)
     else:
-        line += ', include-all-proxies=true'
+        line += ',include-all-proxies=true,policy-regex-filter=' + \
+            item['content']
     o(line)
-o()
 o('[Rule]')
 for item in src['filter']:
     match item[0]:

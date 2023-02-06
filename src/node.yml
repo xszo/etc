@@ -1,73 +1,78 @@
-- name: DEFAULT
-  type: static
+- type: static
+  name: DEFAULT
   content:
     [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.arrow.right.system
-- name: SYSTEM
-  type: static
+- type: static
+  name: SYSTEM
   content: [DEFAULT, DIRECT, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.and.right.system
-- name: REGION
-  type: static
+- type: static
+  name: REGION
   content:
     [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.arrow.right.system
-- name: R-CN
-  type: static
+- type: static
+  name: R-CN
   content: [REGION, DIRECT, CN, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.and.right.system
-- name: R-JP
-  type: static
+- type: static
+  name: R-JP
   content: [REGION, DIRECT, JP, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.and.right.system
-- name: R-TW
-  type: static
+- type: static
+  name: R-TW
   content: [REGION, DIRECT, TW, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.and.right.system
-- name: R-US
-  type: static
+- type: static
+  name: R-US
   content: [REGION, DIRECT, US, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.and.right.system
-- name: NODE
-  type: test
+- type: test
+  name: NODE
+  content: .*
   a-ico: arrow.triangle.swap.system
-- name: NODE0
-  type: static
+- type: static
+  name: NODE0
+  content: .*
   a-ico: arrow.triangle.branch.system
-- name: NODE1
-  type: static
+- type: static
+  name: NODE1
+  content: .*
   a-ico: arrow.triangle.branch.system
-- name: NODE2
-  type: static
+- type: static
+  name: NODE2
+  content: .*
   a-ico: arrow.triangle.branch.system
-- name: NODE3
-  type: static
+- type: static
+  name: NODE3
+  content: .*
   a-ico: arrow.triangle.branch.system
-- name: CN
-  type: test
+- type: test
+  name: CN
   content: (?<![a-zA-Z])((CN)|(CHN)|(China))(?![a-zA-Z])|中
   a-ico: arrow.triangle.swap.system
-- name: DE
-  type: test
+- type: test
+  name: DE
   content: (?<![a-zA-Z])((DE)|(German)|(Berlin))(?![a-zA-Z])|德
   a-ico: arrow.triangle.swap.system
-- name: GB
-  type: test
+- type: test
+  name: GB
   content: (?<![a-zA-Z])((?<![0-9])(GB)|(UK)|(London))(?![a-zA-Z])|英
   a-ico: arrow.triangle.swap.system
-- name: JP
-  type: test
+- type: test
+  name: JP
   content: (?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(?<!尼)日
   a-ico: arrow.triangle.swap.system
-- name: SG
-  type: test
+- type: test
+  name: SG
   content: (?<![a-zA-Z])((SG)|(Singapore))(?![a-zA-Z])|新|(獅|狮城)
   a-ico: arrow.triangle.swap.system
-- name: TW
-  type: test
+- type: test
+  name: TW
   content: (?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|台|臺
   a-ico: arrow.triangle.swap.system
-- name: US
-  type: test
+- type: test
+  name: US
   content: (?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美
   a-ico: arrow.triangle.swap.system

@@ -1,11 +1,8 @@
-def o(line=''):
+def o(line):
     out.write(line + '\n')
 
 
-base = src['base'] + 'clash/'
-interval = str(src['interval'])
-
-o('# ' + base + 'config.yaml' + '''\n
+o('# ' + src['base'] + 'clash/config.yaml' + '''
 log-level: silent
 mode: rule
 profile:
@@ -37,25 +34,22 @@ dns:
   - ''' + src['dns']['doh'])
 o('proxy-groups:')
 for item in src['node']:
-    tmp = '- name: ' + item['name']
+    line = '- name: ' + item['name']
     if item['type'] == 'static':
-        tmp += '\n  type: select'
+        line += '\n  type: select'
     elif item['type'] == 'test':
-        tmp += '\n  type: url-test'
-        tmp += '\n  lazy: true'
-        tmp += '\n  url: ' + src['t-http']
+        line += '\n  type: url-test'
+        line += '\n  lazy: true'
+        line += '\n  url: ' + src['t-http']
     else:
         continue
-    if 'content' in item:
-        if isinstance(item['content'], list):
-            tmp += '\n  proxies:'
-            for val in item['content']:
-                tmp += ('\n  - ' + val)
-        else:
-            tmp += '\n  filter: ' + item['content']
+    if isinstance(item['content'], list):
+        line += '\n  proxies:'
+        for val in item['content']:
+            line += ('\n  - ' + val)
     else:
-        tmp += '\n  filter: .*'
-    o(tmp)
+        line += '\n  filter: ' + item['content']
+    o(line)
 o('rules:')
 for item in src['filter']:
     match item[0]:
