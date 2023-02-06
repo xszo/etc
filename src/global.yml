@@ -1,4 +1,6 @@
 domain:
+  # Apple
+  - apple
   # Google
   - ampproject.org
   - android.com
@@ -292,6 +294,9 @@ domain:
   - ea.com
   - hoyoverse.com
   - supercell.com
+  # Content
+  - ehgt.org # e-hentai img
+  - hath.network # e-hentai
   # Porn
   - 1ka.com # xvideos
   - phncdn.com
@@ -332,6 +337,5 @@ domain:
   - proton.me
   - readdle.com
   - tutanota.com
-  # Misc
+  # Other
   - justmysocks.net
-  - synology.com

@@ -1,17 +1,18 @@
 domain:
   - jp
   # DMM
-  - dmm-extension.com
   - dmm.com
   - dmmapis.com
+  - dmm-extension.com
   # Abema
+  - abema.tv
   - abema-tv.com
   - abema.io
-  - abema.tv
   - abematv.akamaized.net
+  - vod-abematv.akamaized.net
+  - ds-linear-abematv.akamaized.net
   - hayabusa.io
   - hayabusa.media
-  - vod-abematv.akamaized.net
   # Pixiv
   - booth.pm
   - fanbox.cc

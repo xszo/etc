@@ -1,18 +1,20 @@
 domain:
   # Apple
-  - apple
+  - aaplimg.com # cdn
   - apple-cloudkit.com
-  - apple-mapkit.com
+  - apple-dns.net
   - apple-studies.com
   - apple.com
   - cdn-apple.com
   - icloud-content.com
-  - icloud-sandbox.com
+  - icloud-sandbox.com # web
   - icloud.com
   - me.com # mail
   - mzstatic.com # img
   # Microsoft
   - msftconnecttest.com
   - msftncsi.com
+  # Other
+  - synology.com
 ipcidr:
-  - 17.0.0.0/8
+  - 17.0.0.0/8 # apple
