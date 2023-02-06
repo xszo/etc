@@ -41,7 +41,6 @@ domain:
   # Microsoft
   - 1drv.ms
   - aka.ms
-  - appcenter.ms
   - bing.com
   - bing.net
   - bingapis.com
@@ -50,7 +49,6 @@ domain:
   - live.com
   - live.net
   - microsoft.com
-  - microsoftapp.net
   - microsoftonline.com
   - msauth.net
   - msecnd.net
@@ -81,6 +79,7 @@ domain:
   - trafficmanager.net
   - unity3d.com
   # VS & GitHub
+  - appcenter.ms
   - exp-tas.com
   - ghcr.io
   - github.com
@@ -228,28 +227,17 @@ domain:
   - lencr.org
   - ocsp-certum.com
   - omniroot.com
-  - secomtrust.com
   - secomtrust.net
   - sectigo.com
   - usertrust.com
   - verisign.net
   # CDN
-  - cloudinary.com
-  - conviva.com
   - fastly.net
   - fontawesome.com
-  - fonts.net
-  - highwinds-cdn.com
-  - hwcdn.net
   - imgix.net
   - imgur.com
-  - jquery.com
   - jsdelivr.net
   - loli.net
-  - pressablecdn.com
-  - sentry-cdn.com
-  - simplecast.com
-  - simplecastcdn.com
   - unpkg.com
   # Services
   - adjust.com
@@ -346,3 +334,4 @@ domain:
   - tutanota.com
   # Misc
   - justmysocks.net
+  - synology.com

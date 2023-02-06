@@ -6,6 +6,9 @@ domain:
   - hbo.com
   - hbomax.com
   - hbomaxcdn.com
+  
+  # CDN
+  - highwinds-cdn.com
   # Content
   - e-hentai.org
   - ehgt.org # e-hentai

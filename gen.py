@@ -1,7 +1,7 @@
 import os
 
-path = 'tmp/filter'
-if os.path.exists(path):
-    os.system('rm -Rf ' + path)
-os.makedirs(path)
-os.system('cp -Rf src/* ' + path + '/')
+tmpPath = 'tmp/net/filter'
+if os.path.exists(tmpPath):
+    os.system('rm -Rf ' + tmpPath)
+os.makedirs(tmpPath)
+os.system('cp -Rf src/* ' + tmpPath)

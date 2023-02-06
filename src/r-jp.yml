@@ -6,12 +6,12 @@ domain:
   - dmmapis.com
   # Abema
   - abema-tv.com
-  - abema.adx.promo
   - abema.io
   - abema.tv
   - abematv.akamaized.net
   - hayabusa.io
   - hayabusa.media
+  - vod-abematv.akamaized.net
   # Pixiv
   - booth.pm
   - fanbox.cc
