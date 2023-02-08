@@ -1,0 +1,61 @@
+x:
+  alias: ""
+  gen:
+    - shadowrocket
+dns:
+  plain:
+    - 223.5.5.5
+    - 223.6.6.6
+  doh: https://dns.alidns.com/dns-query
+node:
+  - type: test
+    name: JP
+    content: (?<![a-zA-Z])((JP)|(Japan)|(Tokyo))(?![a-zA-Z])|(?<!尼)日
+    a-ico: arrow.triangle.swap.system
+  - type: test
+    name: TW
+    content: (?<![a-zA-Z])((TW)|(Taiwan))(?![a-zA-Z])|台|臺
+    a-ico: arrow.triangle.swap.system
+  - type: test
+    name: US
+    content: (?<![a-zA-Z])((US)|(NY)|(LA))(?![a-zA-Z])|美
+    a-ico: arrow.triangle.swap.system
+filter:
+  - type: gen
+    name: direct
+    content: DIRECT
+  - type: gen
+    name: global
+    content: PROXY
+  - type: gen
+    name: system
+    content: DIRECT
+  - type: gen
+    name: block
+    content: REJECT
+  - type: gen
+    name: region
+    content: PROXY
+  - type: gen
+    name: r-cn
+    content: DIRECT
+  - type: geoip
+    name: CN
+    content: DIRECT
+  - type: gen
+    name: r-jp
+    content: JP
+  - type: geoip
+    name: JP
+    content: JP
+  - type: gen
+    name: r-tw
+    content: TW
+  - type: geoip
+    name: TW
+    content: TW
+  - type: gen
+    name: r-us
+    content: US
+  - type: final
+    content: PROXY

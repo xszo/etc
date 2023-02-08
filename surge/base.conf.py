@@ -6,6 +6,8 @@ o('#!MANAGED-CONFIG ' + src['base'] + 'surge/base.conf' +
   ' interval=' + str(src['interval']) + ' strict=false')
 o('''[General]
 loglevel=warning
+ipv6=true
+ipv6-vif=auto
 hijack-dns=*:53
 udp-policy-not-supported-behaviour=REJECT''')
 o('dns-server=' + src['dns']['plain'][0] + ',' + src['dns']['plain'][1])

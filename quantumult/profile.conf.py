@@ -32,7 +32,8 @@ for item in src['filter']:
     if item[0] == 0:
         o('final,' + item[1])
 o('[filter_remote]')
-o(src['base'] + 'quantumult/filter.txt,update-interval=' + str(src['interval']))
+o(src['base'] + 'quantumult/' + src['x'] +
+  'filter.txt,update-interval=' + str(src['interval']))
 o('[mitm]')
 o('[rewrite_local]')
 o('[rewrite_remote]')

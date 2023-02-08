@@ -1,7 +1,12 @@
-base: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/
-interval: 86400
-t-http: http://bing.com/
-t-dns: bing.com@1.1.1.1
+x:
+  alias: ""
+  gen:
+    - quantumult
+    - clash
+    - surge
+  include:
+    node: src/node.yml
+    filter: src/filter.yml
 dns:
   plain:
     - 223.5.5.5

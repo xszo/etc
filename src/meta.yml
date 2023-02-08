@@ -1,0 +1,17 @@
+base: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/
+interval: 86400
+t-http: http://bing.com/
+t-dns: bing.com@1.1.1.1
+dns:
+  plain:
+    - 1.1.1.1
+    - 1.0.0.1
+  doh: https://cloudflare-dns.com/dns-query
+node:
+  - type: static
+    name: XSZO
+    content: [DIRECT]
+    a-ico: checkmark.system
+filter:
+  - type: final
+    content: DIRECT
