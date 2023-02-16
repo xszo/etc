@@ -1,6 +1,6 @@
 #!/bin/zsh
 
 sudo apt install python3 python-is-python3
-python -m pip install pyyaml
+python -m pip install requests pyyaml
 
 source gen
