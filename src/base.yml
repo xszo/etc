@@ -1,12 +1,13 @@
 base: https://cdn.jsdelivr.net/gh/xszo/etc@o/net/
 interval: 86400
-t-http: http://bing.com/
-t-dns: bing.com@1.1.1.1
+t-http: http://1.1.1.1/
 dns:
   plain:
-    - 1.1.1.1
-    - 1.0.0.1
-  doh: https://cloudflare-dns.com/dns-query
+    - "1.1.1.1"
+    - "1.0.0.1"
+    - "[2606:4700:4700::1111]"
+    - "[2606:4700:4700::1001]"
+  https: https://cloudflare-dns.com/dns-query
 node:
   - type: static
     name: XSZO

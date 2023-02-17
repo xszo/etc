@@ -1,10 +1,9 @@
-def o(line):
+def o(line=''):
     out.write(line + '\n')
 
 
-o('# ' + src['base'] + 'clash/scv.ini')
 o('[custom]')
-o('clash_rule_base=' + src['base'] + 'clash/scv.yml')
+o('clash_rule_base=' + src['base'] + 'clash/base.yml')
 for item in src['node']:
     line = 'custom_proxy_group=' + item['name']
     if item['type'] == 'static':

@@ -2,25 +2,25 @@ import requests
 import os
 import yaml
 
-listSrc = ['src/main.yml', 'src/mini.yml']
-listExt = [
+ListSrc = ['src/main.yml', 'src/mini.yml']
+ListExt = [
     'quantumult/parser.js https://cdn.jsdelivr.net/gh/KOP-XIAO/QuantumultX@master/Scripts/resource-parser.js'
 ]
 
 # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- # ---- #
 
-genPath = 'out/net/'
-listGen = {
+GenPath = 'out/net/'
+ListGen = {
     'quantumult': ['quantumult/profile.conf', 'quantumult/filter.txt'],
-    'clash': ['clash/config.yaml', 'clash/scv.ini', 'clash/scv.yml'],
-    'surge': ['surge/profile.conf', 'surge/base.conf', 'surge/router.sgmodule', 'other/scv.ini'],
-    'shadowrocket': ['other/sr.conf']
+    'clash': ['clash/base.yml', 'clash/config.yaml', 'clash/scv.ini'],
+    'surge': ['surge/base.conf', 'surge/profile.conf', 'surge/router.sgmodule', 'other/scv.ini'],
+    'shadowrocket': ['other/shadowrocket.conf']
 }
 
 # generate
 
-for unit in listSrc:
-    with open('src/meta.yml', 'tr', encoding='utf-8') as file:
+for unit in ListSrc:
+    with open('src/base.yml', 'tr', encoding='utf-8') as file:
         src = yaml.safe_load(file)
 
     # load src
@@ -29,25 +29,25 @@ for unit in listSrc:
     srcX = src['x']
     src['x'] = srcX['alias']
     if 'include' in srcX:
-        for k, f in srcX['include'].items():
-            with open(f, 'tr', encoding='utf-8') as file:
-                src[k] = yaml.safe_load(file)
+        for key, val in srcX['include'].items():
+            with open(val, 'tr', encoding='utf-8') as file:
+                src[key] = yaml.safe_load(file)
 
     # load filter
-    listFilter = src['filter']
+    ListFilter = src['filter']
     src['filter'] = []
-    srcDomain = [[], [], [], []]
-    for item in listFilter:
+    SrcDomain = [[], [], [], []]
+    for item in ListFilter:
         if item['type'] == 'gen':
             with open('tmp/net/filter/' + item['name'] + '.yml', 'tr', encoding='utf-8') as file:
                 raw = yaml.safe_load(file)
             if 'domain' in raw:
                 for line in raw['domain']:
                     if line[0] == '_':
-                        srcDomain[line.count('.')].append(
+                        SrcDomain[line.count('.')].append(
                             (2, line[1:], item['content']))
                     else:
-                        srcDomain[line.count('.')].append(
+                        SrcDomain[line.count('.')].append(
                             (1, line, item['content']))
             if 'ipcidr' in raw:
                 for line in raw['ipcidr']:
@@ -55,23 +55,23 @@ for unit in listSrc:
                         src['filter'].append((4, line[1:-1], item['content']))
                     else:
                         src['filter'].append((3, line, item['content']))
-    for item in srcDomain:
+    for item in SrcDomain:
         src['filter'] = item + src['filter']
-    for item in listFilter:
+    for item in ListFilter:
         if item['type'] == 'geoip':
             src['filter'].append((5, item['name'], item['content']))
-    for item in listFilter:
+    for item in ListFilter:
         if item['type'] == 'final':
             src['filter'].append((0, item['content']))
 
     # call generator
     for item in srcX['gen']:
-        for exePath in listGen[item]:
-            outDir = genPath + os.path.dirname(exePath)
+        for exePath in ListGen[item]:
+            outDir = GenPath + os.path.dirname(exePath)
             if not os.path.exists(outDir):
                 os.makedirs(outDir)
             if os.path.exists(exePath):
-                outPath = genPath + exePath
+                outPath = GenPath + exePath
                 if not os.path.exists(outPath):
                     os.system('cp -f ' + exePath + ' ' + outPath)
             else:
@@ -86,7 +86,7 @@ for unit in listSrc:
 
 # fetch external
 
-for item in listExt:
-    item = (genPath + item).split(' ')
+for item in ListExt:
+    item = (GenPath + item).split(' ')
     with open(item[0], 'tw', encoding='utf-8') as file:
         file.write(requests.get(item[1]).text)

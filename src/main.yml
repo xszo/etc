@@ -9,6 +9,8 @@ x:
     filter: src/filter.yml
 dns:
   plain:
-    - 223.5.5.5
-    - 223.6.6.6
-  doh: https://dns.alidns.com/dns-query
+    - "223.5.5.5"
+    - "223.6.6.6"
+    - "[2400:3200::1]"
+    - "[2400:3200:baba::1]"
+  https: https://dns.alidns.com/dns-query

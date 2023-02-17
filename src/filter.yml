@@ -2,11 +2,11 @@
   name: direct
   content: DIRECT
 - type: gen
-  name: global
-  content: DEFAULT
-- type: gen
   name: system
   content: SYSTEM
+- type: gen
+  name: global
+  content: DEFAULT
 - type: gen
   name: block
   content: REJECT

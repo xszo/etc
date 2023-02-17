@@ -1,7 +1,7 @@
 - type: static
   name: DEFAULT
   content:
-    [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
+    [DIRECT, CN, DE, GB, HK, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.arrow.right.system
 - type: static
   name: SYSTEM
@@ -10,7 +10,7 @@
 - type: static
   name: REGION
   content:
-    [DIRECT, NODE, CN, DE, GB, JP, SG, TW, US, NODE0, NODE1, NODE2, NODE3]
+    [DIRECT, CN, DE, GB, HK, JP, SG, TW, US, NODE, NODE0, NODE1, NODE2, NODE3]
   a-ico: arrow.left.arrow.right.system
 - type: static
   name: R-CN
@@ -59,6 +59,10 @@
 - type: test
   name: GB
   content: (?<![a-zA-Z])((?<![0-9])(GB)|(UK)|(London))(?![a-zA-Z])|英
+  a-ico: arrow.triangle.swap.system
+- type: test
+  name: HK
+  content: (?<![a-zA-Z])((HK)|(Hong ?Kong))|港
   a-ico: arrow.triangle.swap.system
 - type: test
   name: JP

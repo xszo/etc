@@ -2,21 +2,10 @@ def o(line=''):
     out.write(line + '\n')
 
 
-o('#!MANAGED-CONFIG ' + src['base'] + 'surge/base.conf' +
-  ' interval=' + str(src['interval']) + ' strict=false')
-o()
-o('''[General]
-loglevel = warning
-ipv6 = true
-ipv6-vif = auto
-udp-priority = true
-udp-policy-not-supported-behaviour = REJECT
-internet-test-url = ''' + src['t-http'] + '''
-proxy-test-url = ''' + src['t-http'] + '''
-hijack-dns = *:53''')
-o('dns-server = ' + src['dns']['plain'][0] + ', ' + src['dns']['plain'][1] +
-  ', ' + src['dns']['plain'][2] + ', ' + src['dns']['plain'][3])
-o('encrypted-dns-server = ' + src['dns']['https'])
+o('[General]')
+o('update-url = ' + src['base'] + 'other/shadowrocket.conf')
+o('hijack-dns = *:53')
+o('dns-server = system, ' + src['dns']['https'])
 o()
 o('[Proxy Group]')
 for item in src['node']:
@@ -24,15 +13,14 @@ for item in src['node']:
     if item['type'] == 'static':
         line += 'select'
     elif item['type'] == 'test':
-        line += 'url-test'
+        line += 'url-test, url=' + src['t-http']
     else:
         continue
     if isinstance(item['content'], list):
         for val in item['content']:
             line += (', ' + val)
     else:
-        line += ', include-all-proxies=true, policy-regex-filter=' + \
-            item['content']
+        line += ', policy-regex-filter=' + item['content']
     o(line)
 o()
 o('[Rule]')
