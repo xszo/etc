@@ -1,0 +1,29 @@
+log-level: silent
+mode: rule
+profile:
+  store-selected: true
+  store-fake-ip: true
+mixed-port: 8422
+redir-port: 8421
+allow-lan: false
+external-controller: 127.0.0.1:8420
+secret: '00000000'
+tun:
+  enable: true
+  stack: gvisor
+  dns-hijack: [any:53]
+  auto-route: true
+  auto-detect-interface: true
+dns:
+  enable: true
+  listen: 0.0.0.0:8424
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  default-nameserver:
+  - "223.5.5.5"
+  - "223.6.6.6"
+  nameserver:
+  - https://dns.alidns.com/dns-query
