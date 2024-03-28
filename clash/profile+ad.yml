@@ -1,0 +1,381 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  default-nameserver:
+  - 223.5.5.5:53
+  - 223.6.6.6:53
+  - '[2400:3200::1]:53'
+  - '[2400:3200:baba::1]:53'
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:53
+  nameserver:
+  - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    captive.apple.com: 1.1.1.1
+  use-hosts: true
+external-controller: 0.0.0.0:8420
+log-level: warning
+mixed-port: 8422
+mode: rule
+profile:
+  store-fake-ip: true
+  store-selected: true
+  tracing: false
+proxy-groups:
+- icon: "\U0001F6A9"
+  name: SYSTEM
+  proxies:
+  - DEFAULT
+  - DIRECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- icon: "\U0001F6A9"
+  name: DEFAULT
+  proxies:
+  - DIRECT
+  - REJECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- icon: "\U0001F6A9"
+  name: R-CN
+  proxies:
+  - DEFAULT
+  - DIRECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- icon: "\U0001F6A9"
+  name: R-JP
+  proxies:
+  - DEFAULT
+  - DIRECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- icon: "\U0001F6A9"
+  name: R-TW
+  proxies:
+  - DEFAULT
+  - DIRECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- icon: "\U0001F6A9"
+  name: R-US
+  proxies:
+  - DEFAULT
+  - DIRECT
+  - Node0
+  - Node1
+  - Node2
+  - Node3
+  - CN
+  - DE
+  - GB
+  - HK
+  - JP
+  - KR
+  - SG
+  - TW
+  - US
+  - Node
+  - N-JMS
+  type: select
+- filter: .*
+  include-all: true
+  name: Node0
+  type: select
+  use: []
+- filter: .*
+  include-all: true
+  name: Node1
+  type: select
+  use: []
+- filter: .*
+  include-all: true
+  name: Node2
+  type: select
+  use: []
+- filter: .*
+  include-all: true
+  name: Node3
+  type: select
+  use: []
+- filter: "(?<![A-Za-z])(CH?N|Chin(a|ese)|Shanghai)(?![A-Za-z])|\u4E2D(\u570B|\u56FD\
+    |\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: CN
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(DEU?|Deutsch(land)?|Germany?|Berlin)(?![A-Za-z])|\u5FB7(\u570B\
+    |\u56FD|\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: DE
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z\\d]|\\d\\s)(GBR?|Brit(ain|ish)|UK|United\\s?Kingdom|London)(?![A-Za-z])|\u82F1\
+    (\u570B|\u56FD|\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: GB
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(HKG?|Hong\\s?Kong)(?![A-Za-z])|(\u9999?\u6E2F)(\\b|[\\W\\\
+    dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: HK
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(JPN?|Japan(ese)?|Tokyo|Osaka)(?![A-Za-z])|(?<!\u5C3C)\u65E5\
+    (\u672C|\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: JP
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(KO?R|Korean?|Seoul)(?![A-Za-z])|(\u97D3|\u97E9)(\u570B|\u56FD\
+    |\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: KR
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(SGP?|Singapore)(?![A-Za-z])|\u65B0(\u52A0\u5761|\\b|[\\W\\\
+    dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: SG
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(TWN?|Taiwan(ese)?|Taipei)(?![A-Za-z])|\u53F0(\u7063|\u6E7E\
+    |\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: TW
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: "(?<![A-Za-z])(USA?|United\\s?States|American?|LA)(?![A-Za-z])|\u7F8E(\u570B\
+    |\u56FD|\\b|[\\W\\dA-Za-z])"
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: US
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: .*
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: Node
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+- filter: ^JMS-\d+@c\d+s\d\d?\.\w+\.[a-z]+:\d+$
+  hidden: true
+  include-all: true
+  interval: 600
+  lazy: true
+  name: N-JMS
+  type: url-test
+  url: http://1.1.1.1/
+  use: []
+proxy-providers: {}
+redir-port: 8421
+rule-providers:
+  ad:
+    behavior: domain
+    interval: 86400
+    path: ./filter/ad.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-ad.yml
+  adz:
+    behavior: domain
+    interval: 86400
+    path: ./filter/adz.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-adz.yml
+  cn:
+    behavior: domain
+    interval: 86400
+    path: ./filter/cn.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-cn.yml
+  direct:
+    behavior: domain
+    interval: 86400
+    path: ./filter/direct.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-direct.yml
+  jp:
+    behavior: domain
+    interval: 86400
+    path: ./filter/jp.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-jp.yml
+  system:
+    behavior: domain
+    interval: 86400
+    path: ./filter/system.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-system.yml
+  tw:
+    behavior: domain
+    interval: 86400
+    path: ./filter/tw.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-tw.yml
+  us:
+    behavior: domain
+    interval: 86400
+    path: ./filter/us.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-us.yml
+  world:
+    behavior: domain
+    interval: 86400
+    path: ./filter/world.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-world.yml
+  ww:
+    behavior: domain
+    interval: 86400
+    path: ./filter/ww.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-ww.yml
+rules:
+- RULE-SET, adz, DEFAULT
+- RULE-SET, ad, REJECT
+- RULE-SET, direct, DIRECT
+- RULE-SET, system, SYSTEM
+- RULE-SET, world, DEFAULT
+- RULE-SET, cn, R-CN
+- RULE-SET, jp, R-JP
+- RULE-SET, tw, R-TW
+- RULE-SET, us, R-US
+- RULE-SET, ww, DEFAULT
+- IP-CIDR,169.254.0.0/16,DIRECT
+- IP-CIDR,192.168.0.0/16,DIRECT
+- IP-CIDR,172.16.0.0/12,DIRECT
+- IP-CIDR,100.64.0.0/10,DIRECT
+- IP-CIDR,0.0.0.0/8,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- IP-CIDR,17.0.0.0/8,SYSTEM
+- IP-CIDR6,::/127,DIRECT
+- IP-CIDR6,fe80::/10,DIRECT
+- IP-CIDR6,fc00::/7,DIRECT
+- GEOIP,CN,R-CN
+- GEOIP,JP,R-JP
+- GEOIP,TW,R-TW
+- MATCH, DEFAULT
+secret: '00000000'
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - any:53
+  enable: true
+  stack: system

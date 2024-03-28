@@ -1,0 +1,104 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  default-nameserver:
+  - 223.5.5.5:53
+  - 223.6.6.6:53
+  - '[2400:3200::1]:53'
+  - '[2400:3200:baba::1]:53'
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:53
+  nameserver:
+  - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    captive.apple.com: 1.1.1.1
+  use-hosts: true
+external-controller: 0.0.0.0:8420
+log-level: warning
+mixed-port: 8422
+mode: rule
+profile:
+  store-fake-ip: true
+  store-selected: true
+  tracing: false
+redir-port: 8421
+rule-providers:
+  cn:
+    behavior: domain
+    interval: 86400
+    path: ./filter/cn.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-cn.yml
+  direct:
+    behavior: domain
+    interval: 86400
+    path: ./filter/direct.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-direct.yml
+  jp:
+    behavior: domain
+    interval: 86400
+    path: ./filter/jp.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-jp.yml
+  system:
+    behavior: domain
+    interval: 86400
+    path: ./filter/system.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-system.yml
+  tw:
+    behavior: domain
+    interval: 86400
+    path: ./filter/tw.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-tw.yml
+  us:
+    behavior: domain
+    interval: 86400
+    path: ./filter/us.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-us.yml
+  world:
+    behavior: domain
+    interval: 86400
+    path: ./filter/world.yml
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-world.yml
+rules:
+- RULE-SET, direct, DIRECT
+- "RULE-SET, system, \U0001F6A9SYSTEM"
+- "RULE-SET, world, \U0001F6A9DEFAULT"
+- "RULE-SET, cn, \U0001F6A9R-CN"
+- "RULE-SET, jp, \U0001F6A9R-JP"
+- "RULE-SET, tw, \U0001F6A9R-TW"
+- "RULE-SET, us, \U0001F6A9R-US"
+- IP-CIDR,169.254.0.0/16,DIRECT
+- IP-CIDR,192.168.0.0/16,DIRECT
+- IP-CIDR,172.16.0.0/12,DIRECT
+- IP-CIDR,100.64.0.0/10,DIRECT
+- IP-CIDR,0.0.0.0/8,DIRECT
+- IP-CIDR,10.0.0.0/8,DIRECT
+- IP-CIDR,127.0.0.0/8,DIRECT
+- "IP-CIDR,17.0.0.0/8,\U0001F6A9SYSTEM"
+- IP-CIDR6,::/127,DIRECT
+- IP-CIDR6,fe80::/10,DIRECT
+- IP-CIDR6,fc00::/7,DIRECT
+- "GEOIP,CN,\U0001F6A9R-CN"
+- "GEOIP,JP,\U0001F6A9R-JP"
+- "GEOIP,TW,\U0001F6A9R-TW"
+- "MATCH, \U0001F6A9DEFAULT"
+secret: '00000000'
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - any:53
+  enable: true
+  stack: system

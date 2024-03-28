@@ -1,0 +1,17 @@
+.abema-tv.com
+.abema.io
+.abema.tv
+.abematv.akamaized.net
+.colorfulpalette.org
+.dlsite.com
+.dmm-extension.com
+.dmm.com
+.fanbox.cc
+.jp
+.linear-abematv.akamaized.net
+.misskey.io
+.misskeyusercontent.com
+.pixiv.net
+.pximg.net
+.syosetu.com
+.vod-abematv.akamaized.net

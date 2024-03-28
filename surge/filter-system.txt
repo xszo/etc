@@ -1,0 +1,3 @@
+.icloud.com
+.me.com
+.synology.com

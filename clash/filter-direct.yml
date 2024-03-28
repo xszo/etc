@@ -1,0 +1,7 @@
+payload:
+- +.lan
+- +.local
+- +.ntp.org
+- +.time.apple.com
+- +.time.google.com
+- +.time.windows.com
