@@ -1,0 +1,7 @@
++.ntp.org
++.synology.com
++.time.apple.com
++.time.cloudflare.com
++.time.google.com
++.time.nist.gov
++.time.windows.com

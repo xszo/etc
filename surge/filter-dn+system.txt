@@ -1,0 +1,7 @@
+DOMAIN-SUFFIX,ntp.org
+DOMAIN-SUFFIX,synology.com
+DOMAIN-SUFFIX,time.apple.com
+DOMAIN-SUFFIX,time.cloudflare.com
+DOMAIN-SUFFIX,time.google.com
+DOMAIN-SUFFIX,time.nist.gov
+DOMAIN-SUFFIX,time.windows.com

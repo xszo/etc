@@ -1,0 +1,9 @@
+DOMAIN-SUFFIX,denpasoft.com
+DOMAIN-SUFFIX,e-hentai.org
+DOMAIN-SUFFIX,ehgt.org
+DOMAIN-SUFFIX,exhentai.org
+DOMAIN-SUFFIX,hanime.tv
+DOMAIN-SUFFIX,hath.network
+DOMAIN-SUFFIX,highwinds-cdn.com
+DOMAIN-SUFFIX,nhentai.net
+DOMAIN-SUFFIX,us

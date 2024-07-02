@@ -1,0 +1,14 @@
+DOMAIN-SUFFIX,bahamut.akamaized.net
+DOMAIN-SUFFIX,bilinovel.com
+DOMAIN-SUFFIX,esjzone.cc
+DOMAIN-SUFFIX,esjzone.me
+DOMAIN-SUFFIX,gamon.net
+DOMAIN-SUFFIX,hanime1.me
+DOMAIN-SUFFIX,lightnovel.us
+DOMAIN-SUFFIX,linovelib.com
+DOMAIN-SUFFIX,masiro.me
+DOMAIN-SUFFIX,tw
+DOMAIN-SUFFIX,voidlord.com
+DOMAIN-SUFFIX,wenku8.net
+DOMAIN-SUFFIX,wnacg.com
+DOMAIN-SUFFIX,yamibo.com

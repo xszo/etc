@@ -1,0 +1,98 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  default-nameserver:
+  - 223.5.5.5:53
+  - 223.6.6.6:53
+  - '[2400:3200::1]:53'
+  - '[2400:3200:baba::1]:53'
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:53
+  nameserver:
+  - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    captive.apple.com: 1.1.1.1
+  prefer-h3: true
+  use-hosts: true
+  use-system-hosts: true
+external-controller: 0.0.0.0:9090
+geo-auto-update: true
+geodata-mode: false
+ipv6: true
+log-level: warning
+mixed-port: 7892
+mode: rule
+ntp:
+  enable: true
+  interval: 60
+  port: 123
+  server: time.cloudflare.com
+  write-to-system: false
+port: 7890
+profile:
+  store-fake-ip: true
+  store-selected: true
+  tracing: false
+redir-port: 7893
+rule-providers:
+  dncn:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+cn.txt
+  dnspecfi:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+specfi.txt
+  dnxcn:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+xcn.txt
+  ipcn:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+cn.txt
+  ipspecfi:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+specfi.txt
+rules:
+- RULE-SET, dnspecfi, DIRECT
+- RULE-SET, dncn, DIRECT
+- RULE-SET, dnxcn, Node
+- RULE-SET, ipspecfi, DIRECT
+- RULE-SET, ipcn, DIRECT
+- MATCH, Node
+secret: '00000000'
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  override-destination: false
+  parse-pure-ip: true
+socks-port: 7891
+tcp-concurrent: true
+tproxy-port: 7894
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - udp://any:53
+  - tcp://any:53
+  enable: true
+  stack: system
+unified-delay: true
