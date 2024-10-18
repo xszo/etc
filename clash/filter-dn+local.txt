@@ -1,0 +1,6 @@
++.local
++.ntp.org
+time.apple.com
+time.asia.apple.com
+time.euro.apple.com
+time.windows.com

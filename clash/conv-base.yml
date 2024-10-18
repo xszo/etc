@@ -1,0 +1,148 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  default-nameserver:
+  - 223.6.6.6
+  - 119.29.29.29
+  - '[2400:3200::1]'
+  - '[2402:4e00::]'
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:53
+  nameserver:
+  - https://dns.alidns.com/dns-query
+  - https://doh.pub/dns-query
+  nameserver-policy:
+    captive.apple.com: 1.1.1.1
+  prefer-h3: true
+  use-hosts: true
+  use-system-hosts: true
+external-controller: 0.0.0.0:9090
+geo-auto-update: true
+geodata-mode: false
+ipv6: true
+log-level: warning
+mixed-port: 7892
+mode: rule
+ntp:
+  enable: true
+  interval: 60
+  port: 123
+  server: time.cloudflare.com
+  write-to-system: false
+port: 7890
+profile:
+  store-fake-ip: true
+  store-selected: true
+  tracing: false
+redir-port: 7893
+rule-providers:
+  dncn:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+cn.txt
+  dnjp:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+jp.txt
+  dnlocal:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+local.txt
+  dnstream:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+stream.txt
+  dnsystem:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+system.txt
+  dntw:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+tw.txt
+  dnus:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+us.txt
+  dnworld:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/clash/filter-dn+world.txt
+  ipcn:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+cn.txt
+  ipjp:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+jp.txt
+  iplocal:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+local.txt
+  iptw:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/etc@etc/surge/filter-ip+tw.txt
+rules:
+- RULE-SET, dnlocal, DIRECT
+- "RULE-SET, dnsystem, \U0001F3F3\uFE0F\u200D\U0001F308System"
+- "RULE-SET, dnstream, \U0001F3F3\uFE0F\u200D\U0001F308Stream"
+- "RULE-SET, dncn, \U0001F3F3\uFE0F\u200D\U0001F308R-CN"
+- "RULE-SET, dnjp, \U0001F3F3\uFE0F\u200D\U0001F308R-JP"
+- "RULE-SET, dntw, \U0001F3F3\uFE0F\u200D\U0001F308R-TW"
+- "RULE-SET, dnus, \U0001F3F3\uFE0F\u200D\U0001F308R-US"
+- "RULE-SET, dnworld, \U0001F3F3\uFE0F\u200D\U0001F308Default"
+- RULE-SET, iplocal, DIRECT
+- "RULE-SET, ipcn, \U0001F3F3\uFE0F\u200D\U0001F308R-CN"
+- "RULE-SET, ipjp, \U0001F3F3\uFE0F\u200D\U0001F308R-JP"
+- "RULE-SET, iptw, \U0001F3F3\uFE0F\u200D\U0001F308R-TW"
+- "MATCH, \U0001F3F3\uFE0F\u200D\U0001F308Default"
+secret: '00000000'
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  override-destination: false
+  parse-pure-ip: true
+socks-port: 7891
+tcp-concurrent: true
+tproxy-port: 7894
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - udp://any:53
+  - tcp://any:53
+  enable: true
+  stack: system
+unified-delay: true

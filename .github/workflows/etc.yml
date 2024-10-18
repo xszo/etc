@@ -1,0 +1,50 @@
+name: ETC
+on:
+  workflow_dispatch: ~
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: etc
+  cancel-in-progress: true
+jobs:
+  etc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: init
+        uses: actions/checkout@v4
+        with:
+          path: etc
+      - name: init
+        uses: actions/checkout@v4
+        with:
+          path: gen
+          repository: xszo/et-gen
+      - name: setup
+        run: |
+          pipx install poetry;
+          git config --global user.name "github-actions";
+          git config --global user.email "github-actions@github.com";
+          find etc -mindepth 1 -maxdepth 1 \
+          ! -name "README*" ! -name ".git" ! -name ".github" \
+          -exec rm -rf "{}" \;;
+      - name: setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: poetry
+          cache-dependency-path: |
+            gen/poetry.lock
+      - name: run
+        working-directory: gen
+        run: |
+          ./run -a;
+          cp -rf out/* ../etc;
+      - name: release
+        working-directory: etc
+        run: |
+          (echo;)> null;
+          git add -A;
+          git commit -qm a --amend --reset-author;
+          git push -qf;

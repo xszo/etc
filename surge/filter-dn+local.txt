@@ -1,0 +1,6 @@
+DOMAIN-SUFFIX,local
+DOMAIN-SUFFIX,ntp.org
+DOMAIN,time.apple.com
+DOMAIN,time.asia.apple.com
+DOMAIN,time.euro.apple.com
+DOMAIN,time.windows.com
