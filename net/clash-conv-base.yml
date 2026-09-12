@@ -1,0 +1,140 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  default-nameserver:
+  - 223.5.5.5
+  - 223.6.6.6
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - +.lan
+  - +.local
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:53
+  nameserver:
+  - https://223.5.5.5/dns-query
+  - https://223.6.6.6/dns-query
+  - https://doh.pub/dns-query
+  nameserver-policy:
+    captive.apple.com: 1.1.1.1
+  prefer-h3: true
+  use-hosts: true
+  use-system-hosts: true
+external-controller: 0.0.0.0:9090
+geo-auto-update: true
+geodata-mode: false
+ipv6: true
+log-level: warning
+mixed-port: 7892
+mode: rule
+ntp:
+  enable: true
+  interval: 60
+  port: 123
+  server: time.cloudflare.com
+  write-to-system: false
+port: 7890
+profile:
+  store-fake-ip: true
+  store-selected: true
+  tracing: false
+redir-port: 7893
+rule-providers:
+  dncn:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/cn-dn-c.yml
+  dnjp:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/jp-dn-c.yml
+  dnsystem:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/system-dn-c.yml
+  dntw:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/tw-dn-c.yml
+  dnus:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/us-dn-c.yml
+  dnworld:
+    behavior: domain
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/world-dn-c.yml
+  ipcn:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/cn-ip-s.txt
+  ipjp:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/jp-ip-s.txt
+  ipsystem:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/system-ip-s.txt
+  iptw:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/tw-ip-s.txt
+  ipworld:
+    behavior: classical
+    format: text
+    interval: 86400
+    type: http
+    url: https://cdn.jsdelivr.net/gh/xszo/cr/rule/world-ip-s.txt
+rules:
+- "RULE-SET, dnsystem, \U0001F3F3\uFE0F\u200D\U0001F308System"
+- "RULE-SET, dncn, \U0001F3F3\uFE0F\u200D\U0001F308R-CN"
+- "RULE-SET, dnjp, \U0001F3F3\uFE0F\u200D\U0001F308R-JP"
+- "RULE-SET, dntw, \U0001F3F3\uFE0F\u200D\U0001F308R-TW"
+- "RULE-SET, dnus, \U0001F3F3\uFE0F\u200D\U0001F308R-US"
+- "RULE-SET, dnworld, \U0001F3F3\uFE0F\u200D\U0001F308Default"
+- "RULE-SET, ipsystem, \U0001F3F3\uFE0F\u200D\U0001F308System"
+- "RULE-SET, ipcn, \U0001F3F3\uFE0F\u200D\U0001F308R-CN"
+- "RULE-SET, ipjp, \U0001F3F3\uFE0F\u200D\U0001F308R-JP"
+- "RULE-SET, iptw, \U0001F3F3\uFE0F\u200D\U0001F308R-TW"
+- "RULE-SET, ipworld, \U0001F3F3\uFE0F\u200D\U0001F308Default"
+- "MATCH, \U0001F3F3\uFE0F\u200D\U0001F308Default"
+secret: '00000000'
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  override-destination: false
+  parse-pure-ip: true
+socks-port: 7891
+tcp-concurrent: true
+tproxy-port: 7894
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - udp://any:53
+  - tcp://any:53
+  enable: true
+  stack: system
+unified-delay: true

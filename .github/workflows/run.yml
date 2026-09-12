@@ -1,0 +1,42 @@
+name: Release
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch: ~
+concurrency:
+  group: run
+  cancel-in-progress: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Setup Repo Cr
+        uses: actions/checkout@v7
+        with:
+          repository: xszo/cr
+          path: cr
+      - name: Setup Repo C-network
+        uses: actions/checkout@v7
+        with:
+          repository: xszo/c-network
+          path: network
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ">=3.14"
+      - name: Run C-network
+        working-directory: network
+        run: |
+          ./run -a
+          cp -rf out/* ../cr
+      - name: Run Cr
+        working-directory: cr
+        run: |
+          (echo)> null
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add --all
+          git commit -mactions --amend --reset-author
+          git push --force
